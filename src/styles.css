@@ -140,12 +140,28 @@ body {
   box-shadow: 0 0 0 3px rgba(168, 151, 210, 0.4);
 }
 
-/* Layout */
-.game-grid {
+/* Layout — pre-login (single column) uses flex, post-login uses this grid */
+.game-layout {
   display: grid;
   grid-template-columns: 1fr 340px;
+  grid-template-rows: 1fr 280px;
   gap: var(--spacing-3);
   padding: var(--spacing-3);
+}
+
+.game-layout__text {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.game-layout__sidebar {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.game-layout__canvas {
+  grid-column: 1 / -1;
+  grid-row: 2;
 }
 
 /* Scrollback */
