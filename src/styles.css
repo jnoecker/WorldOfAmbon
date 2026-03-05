@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+@theme {
+  /* Primary palette */
+  --color-lavender: #a897d2;
+  --color-pale-blue: #8caec9;
+  --color-dusty-rose: #b88faa;
+  --color-moss-green: #8da97b;
+  --color-soft-gold: #bea873;
+
+  /* Neutrals */
+  --color-deep-mist: #22293c;
+  --color-soft-fog: #6f7da1;
+  --color-cloud: #d8def1;
+
+  /* Semantic */
+  --color-success: #8da97b;
+  --color-warning: #b88faa;
+  --color-error: #C5A8A8;
+  --color-info: #8caec9;
+
+  /* Backgrounds */
+  --color-bg-primary: #2a3149;
+  --color-bg-secondary: #262f47;
+  --color-bg-elevated: #313a56;
+
+  /* Text */
+  --color-text-primary: #dbe3f8;
+  --color-text-secondary: #aebada;
+  --color-text-disabled: #7f89a8;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 7px rgb(8 10 18 / 30%);
+  --shadow-md: 0 10px 26px rgb(8 10 18 / 36%);
+  --shadow-lg: 0 16px 40px rgb(8 10 18 / 44%);
+  --shadow-glow: 0 0 22px rgb(103 116 170 / 28%);
+
+  /* Spacing */
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 24px;
+  --spacing-6: 32px;
+
+  /* Radii */
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  /* Font families */
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Nunito Sans", "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", "Courier New", monospace;
+
+  /* Easing */
+  --ease-in-soft: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-out-soft: cubic-bezier(0.33, 0.66, 0.66, 1);
+  --ease-in-out-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+:root {
+  /* Surfaces (glassmorphism panels) */
+  --surface-panel-a: rgb(54 63 90 / 95%);
+  --surface-panel-b: rgb(43 53 79 / 92%);
+  --surface-subpanel: rgb(50 60 88 / 94%);
+  --surface-chip: rgb(62 74 108 / 90%);
+  --surface-input: rgb(45 56 84 / 96%);
+
+  /* Lines & edges */
+  --line-soft: rgb(151 166 204 / 36%);
+  --line-faint: rgb(140 154 193 / 24%);
+  --glass-edge: rgb(236 242 255 / 18%);
+
+  /* Z-index scale */
+  --z-hidden: -1;
+  --z-base: 0;
+  --z-dropdown: 10;
+  --z-sticky: 20;
+  --z-fixed: 30;
+  --z-modal-backdrop: 40;
+  --z-modal: 50;
+  --z-tooltip: 60;
+  --z-notification: 70;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.soft-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-2) var(--spacing-4);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--color-text-primary);
+  background: linear-gradient(135deg, #3a4468, #2f3856);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: all 180ms var(--ease-out-soft);
+  user-select: none;
+}
+
+.soft-button:hover {
+  background: linear-gradient(135deg, #4e4a6e, #5a4568);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md), var(--shadow-glow);
+  border-color: rgb(171 186 224 / 44%);
+}
+
+.soft-button:active {
+  background: linear-gradient(135deg, #333c58, #2c3450);
+  transform: translateY(0) scale(0.98);
+  box-shadow: var(--shadow-sm);
+}
+
+.soft-button:disabled {
+  background: linear-gradient(135deg, #2e3448, #282e40);
+  opacity: 0.62;
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.soft-button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(168, 151, 210, 0.4);
+}
