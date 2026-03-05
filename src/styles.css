@@ -140,12 +140,41 @@ body {
   box-shadow: 0 0 0 3px rgba(168, 151, 210, 0.4);
 }
 
-/* Layout */
-.game-grid {
-  display: grid;
-  grid-template-columns: 1fr 340px;
+/* Layout — post-login: top row (text + sidebar) + bottom row (canvas) */
+.game-layout {
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
   gap: var(--spacing-3);
   padding: var(--spacing-3);
+  overflow: hidden;
+}
+
+.game-layout__top {
+  flex: 1 1 0%;
+  display: flex;
+  gap: var(--spacing-3);
+  min-height: 0;
+}
+
+.game-layout__text {
+  flex: 1 1 0%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.game-layout__sidebar {
+  flex: 0 0 340px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  overflow-y: auto;
+}
+
+.game-layout__canvas {
+  flex: 0 0 240px;
+  min-height: 0;
 }
 
 /* Scrollback */
