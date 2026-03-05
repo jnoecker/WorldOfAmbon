@@ -139,3 +139,153 @@ body {
   outline: none;
   box-shadow: 0 0 0 3px rgba(168, 151, 210, 0.4);
 }
+
+/* Layout */
+.game-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3);
+}
+
+/* Scrollback */
+.scrollback {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-soft) transparent;
+}
+
+.scrollback::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollback::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollback::-webkit-scrollbar-thumb {
+  background: var(--line-soft);
+  border-radius: 3px;
+}
+
+/* Command input */
+.command-input {
+  padding: var(--spacing-2) var(--spacing-3);
+  background: var(--surface-input);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  outline: none;
+  transition: border-color 180ms var(--ease-out-soft);
+}
+
+.command-input:focus {
+  border-color: var(--color-dusty-rose);
+  box-shadow: 0 0 0 2px rgba(184, 143, 170, 0.25);
+}
+
+.command-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.command-input::placeholder {
+  color: var(--color-text-disabled);
+}
+
+/* Exit pills */
+.exit-pill {
+  display: inline-block;
+  padding: 2px 10px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-cloud);
+  background: var(--surface-chip);
+  border: 1px solid var(--line-faint);
+  border-radius: var(--radius-md);
+  text-transform: capitalize;
+}
+
+/* Connection pill */
+.connection-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 12px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 999px;
+}
+
+.connection-pill::before {
+  content: "";
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.connection-pill--disconnected {
+  color: var(--color-soft-fog);
+  background: rgba(111, 125, 161, 0.15);
+}
+
+.connection-pill--disconnected::before {
+  background: var(--color-soft-fog);
+}
+
+.connection-pill--connecting {
+  color: var(--color-soft-gold);
+  background: rgba(190, 168, 115, 0.15);
+}
+
+.connection-pill--connecting::before {
+  background: var(--color-soft-gold);
+  animation: pulse-dot 1.2s ease-in-out infinite;
+}
+
+.connection-pill--connected {
+  color: var(--color-moss-green);
+  background: rgba(141, 169, 123, 0.15);
+}
+
+.connection-pill--connected::before {
+  background: var(--color-moss-green);
+}
+
+/* Vital bars */
+.vital-bar-track {
+  height: 10px;
+  background: var(--surface-input);
+  border-radius: 5px;
+  overflow: hidden;
+  border: 1px solid var(--line-faint);
+}
+
+.vital-bar-fill {
+  height: 100%;
+  border-radius: 5px;
+  transition: width 300ms var(--ease-out-soft);
+}
+
+/* Combat indicator */
+.combat-indicator {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-dusty-rose);
+  animation: pulse-text 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+@keyframes pulse-text {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
