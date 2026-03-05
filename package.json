@@ -22,14 +22,17 @@
     "zustand": "^5.0.3"
   },
   "devDependencies": {
-    "@tauri-apps/cli": "^2.2.7",
+    "@eslint/js": "^10.0.1",
     "@tailwindcss/vite": "^4.0.0",
+    "@tauri-apps/cli": "^2.2.7",
     "@types/howler": "^2.2.12",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^10.0.2",
     "tailwindcss": "^4.0.0",
     "typescript": "~5.7.0",
+    "typescript-eslint": "^8.56.1",
     "vite": "^6.0.0"
   }
 }
