@@ -5,6 +5,7 @@ export interface GroupSlice {
   groupLeader: string | null;
   groupMembers: GroupMember[];
   setGroupInfo: (data: GroupInfo) => void;
+  resetGroup: () => void;
 }
 
 export const createGroupSlice: SliceCreator<GroupSlice> = (set) => ({
@@ -12,4 +13,5 @@ export const createGroupSlice: SliceCreator<GroupSlice> = (set) => ({
   groupMembers: [],
   setGroupInfo: (data) =>
     set({ groupLeader: data.leader, groupMembers: data.members }),
+  resetGroup: () => set({ groupLeader: null, groupMembers: [] }),
 });

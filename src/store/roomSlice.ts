@@ -22,6 +22,7 @@ export interface RoomSlice {
   updateMob: (data: RoomMob) => void;
   removeMob: (data: RoomRemoveMob) => void;
   setRoomItems: (data: RoomItem[]) => void;
+  resetRoom: () => void;
 }
 
 export const createRoomSlice: SliceCreator<RoomSlice> = (set) => ({
@@ -49,4 +50,5 @@ export const createRoomSlice: SliceCreator<RoomSlice> = (set) => ({
       mobs: state.mobs.filter((m) => m.id !== data.id),
     })),
   setRoomItems: (data) => set({ roomItems: data }),
+  resetRoom: () => set({ room: null, players: [], mobs: [], roomItems: [] }),
 });

@@ -6,6 +6,7 @@ export interface SkillsSlice {
   statusEffects: StatusEffect[];
   setSkills: (data: Skill[]) => void;
   setStatusEffects: (data: StatusEffect[]) => void;
+  resetSkills: () => void;
 }
 
 export const createSkillsSlice: SliceCreator<SkillsSlice> = (set) => ({
@@ -13,4 +14,5 @@ export const createSkillsSlice: SliceCreator<SkillsSlice> = (set) => ({
   statusEffects: [],
   setSkills: (data) => set({ skills: data }),
   setStatusEffects: (data) => set({ statusEffects: data }),
+  resetSkills: () => set({ skills: [], statusEffects: [] }),
 });

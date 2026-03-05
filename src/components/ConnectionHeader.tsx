@@ -6,6 +6,8 @@ const DEFAULT_URL = "wss://mud.ambon.dev/ws";
 export function ConnectionHeader() {
   const connectionState = useGameStore((s) => s.connectionState);
   const name = useGameStore((s) => s.name);
+  const race = useGameStore((s) => s.race);
+  const class_ = useGameStore((s) => s.class_);
   const connect = useGameStore((s) => s.connect);
   const disconnect = useGameStore((s) => s.disconnect);
   const [url, setUrl] = useState(DEFAULT_URL);
@@ -41,7 +43,12 @@ export function ConnectionHeader() {
       <span className={pillClass}>{pillLabel}</span>
 
       {name && (
-        <span className="font-body text-sm text-lavender font-semibold">{name}</span>
+        <div className="flex items-baseline gap-2">
+          <span className="font-body text-sm font-semibold text-lavender">{name}</span>
+          <span className="font-body text-xs text-text-secondary">
+            {race} {class_}
+          </span>
+        </div>
       )}
 
       <div className="ml-auto flex items-center gap-2">
