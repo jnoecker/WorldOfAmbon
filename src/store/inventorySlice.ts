@@ -7,6 +7,7 @@ export interface InventorySlice {
   setItemsList: (data: CharItemsList) => void;
   addItem: (data: CharItemsAdd) => void;
   removeItem: (data: CharItemsRemove) => void;
+  resetInventory: () => void;
 }
 
 export const createInventorySlice: SliceCreator<InventorySlice> = (set) => ({
@@ -20,4 +21,5 @@ export const createInventorySlice: SliceCreator<InventorySlice> = (set) => ({
     set((state) => ({
       inventory: state.inventory.filter((i) => i.id !== data.id),
     })),
+  resetInventory: () => set({ inventory: [], equipment: {} }),
 });

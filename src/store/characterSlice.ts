@@ -9,6 +9,7 @@ export interface CharacterSlice {
   statusVars: CharStatusVars | null;
   setCharName: (data: CharName) => void;
   setStatusVars: (data: CharStatusVars) => void;
+  resetCharacter: () => void;
 }
 
 export const createCharacterSlice: SliceCreator<CharacterSlice> = (set) => ({
@@ -25,4 +26,6 @@ export const createCharacterSlice: SliceCreator<CharacterSlice> = (set) => ({
       characterLevel: data.level,
     }),
   setStatusVars: (data) => set({ statusVars: data }),
+  resetCharacter: () =>
+    set({ name: null, race: null, class_: null, characterLevel: 0, statusVars: null }),
 });

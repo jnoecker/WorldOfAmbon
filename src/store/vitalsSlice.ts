@@ -13,6 +13,7 @@ export interface VitalsSlice {
   gold: number;
   inCombat: boolean;
   setVitals: (data: CharVitals) => void;
+  resetVitals: () => void;
 }
 
 export const createVitalsSlice: SliceCreator<VitalsSlice> = (set) => ({
@@ -39,4 +40,6 @@ export const createVitalsSlice: SliceCreator<VitalsSlice> = (set) => ({
       gold: data.gold,
       inCombat: data.inCombat,
     }),
+  resetVitals: () =>
+    set({ hp: 0, maxHp: 0, mana: 0, maxMana: 0, level: 0, xp: 0, xpIntoLevel: 0, xpToNextLevel: null, gold: 0, inCombat: false }),
 });

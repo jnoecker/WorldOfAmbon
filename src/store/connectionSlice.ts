@@ -9,6 +9,7 @@ export interface ConnectionSlice {
   disconnect: () => void;
   send: (text: string) => void;
   sendGmcp: (pkg: string, data?: unknown) => void;
+  resetGameState: () => void;
 }
 
 let manager: WebSocketManager | null = null;
@@ -65,7 +66,12 @@ export const createConnectionSlice: SliceCreator<ConnectionSlice> = (
       url,
       onGmcp: (pkg, data) => dispatcher.dispatch(pkg, data),
       onText: (text) => dispatcher.dispatchText(text),
-      onStateChange: (state) => set({ connectionState: state }),
+      onStateChange: (state) => {
+        set({ connectionState: state });
+        if (state === "disconnected") {
+          get().resetGameState();
+        }
+      },
     });
 
     manager.connect();
@@ -76,6 +82,7 @@ export const createConnectionSlice: SliceCreator<ConnectionSlice> = (
       manager.disconnect();
       manager = null;
     }
+    get().resetGameState();
   },
 
   send: (text) => {
@@ -84,5 +91,16 @@ export const createConnectionSlice: SliceCreator<ConnectionSlice> = (
 
   sendGmcp: (pkg, data) => {
     manager?.sendGmcp(pkg, data);
+  },
+
+  resetGameState: () => {
+    const s = get();
+    s.resetCharacter();
+    s.resetVitals();
+    s.resetRoom();
+    s.resetInventory();
+    s.resetSkills();
+    s.resetGroup();
+    s.resetAchievements();
   },
 });
