@@ -4,6 +4,7 @@ import { WorldScene } from "../canvas/scenes/WorldScene";
 import { useGameStore } from "../store";
 
 export function GameCanvas() {
+  const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const pixiRef = useRef<PixiApp | null>(null);
   const worldRef = useRef<WorldScene | null>(null);
@@ -13,7 +14,8 @@ export function GameCanvas() {
   // Initialize PixiJS
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    const container = containerRef.current;
+    if (!canvas || !container) return;
 
     const pixi = new PixiApp();
     pixiRef.current = pixi;
@@ -32,21 +34,21 @@ export function GameCanvas() {
       pixi.resize();
     });
 
-    const onResize = () => pixi.resize();
-    window.addEventListener("resize", onResize);
-
-    // ResizeObserver for container size changes
-    const parent = canvas.parentElement;
-    let ro: ResizeObserver | null = null;
-    if (parent) {
-      ro = new ResizeObserver(() => pixi.resize());
-      ro.observe(parent);
-    }
+    const ro = new ResizeObserver(() => {
+      if (pixiRef.current) {
+        pixiRef.current.resize();
+        // Re-render scene after resize
+        if (worldRef.current) {
+          const s = useGameStore.getState();
+          worldRef.current.setRoom(s.room);
+        }
+      }
+    });
+    ro.observe(container);
 
     return () => {
       cancelled = true;
-      window.removeEventListener("resize", onResize);
-      ro?.disconnect();
+      ro.disconnect();
       pixiRef.current = null;
       worldRef.current = null;
       pixi.destroy();
@@ -58,22 +60,19 @@ export function GameCanvas() {
     worldRef.current?.setRoom(room);
   }, [room]);
 
-  // Re-render on resize by also passing room after resize
-  useEffect(() => {
-    const pixi = pixiRef.current;
-    const world = worldRef.current;
-    if (pixi && world && room) {
-      // Slight delay to let resize complete
-      const id = requestAnimationFrame(() => {
-        world.setRoom(room);
-      });
-      return () => cancelAnimationFrame(id);
-    }
-  }, [room]);
-
   return (
-    <div className="canvas-container relative h-full w-full overflow-hidden" style={{ background: "var(--surface-panel-b)", borderRadius: "var(--radius-lg)", border: "1px solid var(--line-soft)" }}>
-      <canvas ref={canvasRef} className="block h-full w-full" />
+    <div
+      ref={containerRef}
+      className="relative overflow-hidden"
+      style={{
+        background: "var(--surface-panel-b)",
+        borderRadius: "var(--radius-lg)",
+        border: "1px solid var(--line-soft)",
+        width: "100%",
+        height: "100%",
+      }}
+    >
+      <canvas ref={canvasRef} style={{ display: "block" }} />
     </div>
   );
 }

@@ -12,9 +12,14 @@ export class PixiApp {
   }
 
   async init(canvas: HTMLCanvasElement): Promise<void> {
+    const parent = canvas.parentElement;
+    const w = parent?.clientWidth ?? 300;
+    const h = parent?.clientHeight ?? 200;
+
     await this.app.init({
       canvas,
-      resizeTo: canvas.parentElement ?? undefined,
+      width: w,
+      height: h,
       backgroundAlpha: 0,
       antialias: true,
       autoDensity: true,
