@@ -12,15 +12,17 @@ export function GameLayout() {
     <div className="flex h-screen flex-col bg-bg-primary">
       <ConnectionHeader />
       {loggedIn ? (
-        <div className="game-layout flex-1 overflow-hidden">
-          <div className="game-layout__text min-h-0">
-            <TextPanel />
+        <div className="game-layout">
+          <div className="game-layout__top">
+            <div className="game-layout__text">
+              <TextPanel />
+            </div>
+            <div className="game-layout__sidebar">
+              <RoomPanel />
+              <VitalsPanel />
+            </div>
           </div>
-          <div className="game-layout__sidebar flex min-h-0 flex-col gap-3 overflow-y-auto p-1">
-            <RoomPanel />
-            <VitalsPanel />
-          </div>
-          <div className="game-layout__canvas min-h-0">
+          <div className="game-layout__canvas">
             <GameCanvas />
           </div>
         </div>

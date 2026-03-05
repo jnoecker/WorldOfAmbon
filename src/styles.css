@@ -140,28 +140,41 @@ body {
   box-shadow: 0 0 0 3px rgba(168, 151, 210, 0.4);
 }
 
-/* Layout — pre-login (single column) uses flex, post-login uses this grid */
+/* Layout — post-login: top row (text + sidebar) + bottom row (canvas) */
 .game-layout {
-  display: grid;
-  grid-template-columns: 1fr 340px;
-  grid-template-rows: 1fr 280px;
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
   gap: var(--spacing-3);
   padding: var(--spacing-3);
+  overflow: hidden;
+}
+
+.game-layout__top {
+  flex: 1 1 0%;
+  display: flex;
+  gap: var(--spacing-3);
+  min-height: 0;
 }
 
 .game-layout__text {
-  grid-column: 1;
-  grid-row: 1;
+  flex: 1 1 0%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .game-layout__sidebar {
-  grid-column: 2;
-  grid-row: 1;
+  flex: 0 0 340px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  overflow-y: auto;
 }
 
 .game-layout__canvas {
-  grid-column: 1 / -1;
-  grid-row: 2;
+  flex: 0 0 240px;
+  min-height: 0;
 }
 
 /* Scrollback */
